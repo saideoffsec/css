@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CSS Playground — Monaco + Live Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Monaco (VS Code engine) -->
+  <script>
+    // Use jsDelivr CDN; pin a stable version
+    window.MONACO_BASE = "https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min";
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.49.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot red"></span><span class="dot amber"></span><span class="dot green"></span>
+      CSS Playground
+    </div>
+    <div class="status" id="status">Ready</div>
+  </header>
 
+  <main class="workbench">
+    <section class="pane editors">
+      <div class="pane-head">HTML</div>
+      <div id="htmlEditor" class="editor"></div>
+    </section>
+
+    <section class="pane editors">
+      <div class="pane-head">CSS (focus here)</div>
+      <div id="cssEditor" class="editor"></div>
+    </section>
+
+    <section class="pane preview">
+      <div class="pane-head">Preview (HTML + CSS only)</div>
+      <iframe id="preview" title="Live Preview" sandbox="allow-same-origin"></iframe>
+    </section>
+  </main>
+
+  <section class="explainer pane">
+    <div class="pane-head">CSS Explainer</div>
+    <div class="ex-grid">
+      <div>
+        <div class="kv"><span class="k">Context:</span> <code id="context">—</code></div>
+        <div class="kv"><span class="k">Selector:</span> <code id="selector">—</code></div>
+        <div class="kv"><span class="k">Property:</span> <code id="prop">—</code></div>
+        <div class="kv"><span class="k">Value:</span> <code id="val">—</code></div>
+      </div>
+      <div class="desc" id="desc">Place the caret inside a selector or on a property to see an explanation.</div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <button id="formatBtn" class="btn">Format CSS</button>
+    <button id="resetBtn" class="btn btn-ghost">Reset</button>
+  </footer>
+
+  <script>
+    // Monaco AMD loader config
+    require.config({ paths: { vs: window.MONACO_BASE + "/vs" } });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
